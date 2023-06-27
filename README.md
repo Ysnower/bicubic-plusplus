@@ -53,6 +53,7 @@ You can change the `model_path` to your pytorch model location and change the `e
 ## reference
 
 1.[bicubic-plusplus](https://github.com/aselsan-research-imaging-team/bicubic-plusplus)
+
 2.[pytorch-static-quant](https://github.com/Ysnower/pytorch-static-quant)
 
 ##### **If this repository helps you，please star it. Thanks.**
