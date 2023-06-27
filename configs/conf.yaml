@@ -1,0 +1,66 @@
+load_pretrained: False
+strict_load: True
+pretrained_path: ""
+
+loggers:
+  log_images: True
+save_dir: "checkpoint/"
+network:
+  target: models.SR_models.Bicubic_plus_plus
+  params:
+    sr_rate: 3
+
+trainer:
+  base_lr_rate: 5e-4
+  num_epochs: 1000
+  use_Y_channel_in_val: True
+  check_val_every_n_epoch: 100
+
+degradation:
+  train:
+    blur: False
+    img_noise: False
+    kernel_noise: False
+    ksize: 21
+    rate_iso: 1.0
+    sig_min: 0.2
+    sig_max: 2.6
+    img_noise_level: 0.2
+  val:
+    blur: False
+    img_noise: False
+    kernel_noise: False
+    ksize: 21
+    rate_iso: 1.0
+    sig_min: 0.2
+    sig_max: 2.6
+    img_noise_level: 0.2
+
+data:
+  train:
+    lr_path: [ "datasets/DIV2K/DIV2K_train_LR_bicubic/X3/" ]
+    hr_path: [ "datasets/DIV2K/DIV2K_train_HR/" ]
+    augment: True
+    scale: 3
+    patch_cropsize: 288
+    is_train: True
+  val:
+    lr_path: [ "datasets/DIV2K/val_LR/" ]
+    hr_path: [ "datasets/DIV2K/val_HR/" ]
+    augment: False
+    scale: 3
+    patch_cropsize: False
+    is_train: False
+
+loader:
+  train:
+    batch_size: 32
+    shuffle: False
+    num_workers: 24
+    pin_memory: False
+    persistent_workers: True
+  val:
+    batch_size: 1
+    shuffle: False
+    num_workers: 8
+    pin_memory: False
