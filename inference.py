@@ -16,7 +16,6 @@ network.eval()
 transform_data = transforms.Compose([transforms.ToTensor()])
 img_path = "test_img/0004x3.png"
 img = cv2.imread(img_path)
-bicubic = cv2.resize(img, (img.shape[1]*3, img.shape[0]*3), cv2.INTER_CUBIC)
 img = transform_data(img).unsqueeze(0)
 img = img.cuda()
 output = network(img)
@@ -24,6 +23,5 @@ output = output.squeeze().cpu().numpy()
 output = output*255
 output = np.transpose(output, (1, 2, 0))
 cv2.imwrite("out_images/"+img_path.split('/')[-1], output)
-cv2.imwrite("out_images/bicubic_"+img_path.split('/')[-1], bicubic)
 
 
